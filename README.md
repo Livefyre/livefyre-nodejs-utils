@@ -1,5 +1,5 @@
 # Livefyre NodeJS Utility Classes
-
+[![NPM version](https://badge.fury.io/js/livefyre.png)](http://badge.fury.io/js/livefyre)
 
 Livefyre's official library for common server-side tasks necessary for getting Livefyre apps (comments, reviews, etc.) working on your website.
 
