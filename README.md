@@ -59,6 +59,9 @@ var site = network.getSite('siteId', 'siteKey');
 site.getCollectionContent(articleId);
 ```
 
+## Documentation
+Located [here](http://livefyre.github.io/livefyre-nodejs-utils/).
+
 ## Contributing
 
 1. Fork it

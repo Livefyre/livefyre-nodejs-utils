@@ -2,7 +2,7 @@
   "name": "livefyre",
   "version": "1.0.0",
   "description": "Livefyre NodeJS utility classes",
-  "author": "Livefyre",
+  "author": "Livefyre <tools@livefyre.com> (https://github.com/livefyre)",
   "homepage": "https://github.com/livefyre/livefyre-nodejs-utils",
   "repository": {
     "type":"git",
@@ -42,5 +42,5 @@
     "livefyre",
     "utils",
     "api"
-  ],
+  ]
 }
