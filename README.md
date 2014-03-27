@@ -61,7 +61,7 @@ site.getCollectionContent(articleId, callback);
 
 ## Documentation
 
-Located [here](http://livefyre.github.io/livefyre-nodejs-utils/).
+Located [here](answers.livefyre.com/libraries).
 
 ## Contributing
 
