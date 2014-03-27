@@ -3,17 +3,12 @@ var livefyre = require('../lib/livefyre.js');
 
 exports.unit = {
 	// 'should test all API calls': function (test) {
-	// 	var network = livefyre.getNetwork('labs.fyre.co', 'lfaYvfEr/fCotLyRsv6FeRKk81A=');
-	// 	var url = network.setUserSyncUrl('test.com/{id}');
-	// 	var user = network.syncUser('system');
+	// 	var network = livefyre.getNetwork('networkName', 'networkKey');
+	// 	network.setUserSyncUrl('url/{id}');
+	// 	network.syncUser('user');
 
-	// 	var site = livefyre.getNetwork('livefyre.com', 'networkKey').getSite(4, 'siteKey');
-	// 	var content = site.getCollectionContent(584);
-	// 	var usingItNow = function(callback) {
-	// 		return content;
-	// 	}
-	// 	console.log(url);
-	// 	console.log(user);
+	// 	var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
+	// 	var content = site.getCollectionContent('articleId');
 	// 	test.done();
 	// },
 

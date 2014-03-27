@@ -8,10 +8,14 @@
     "type":"git",
     "url": "https://github.com/livefyre/livefyre-nodejs-utils.git"
   },
+
   "directories": {
     "lib": "./lib"
   },
-  "main": "./lib/livefyre", 
+  "main": "./lib/livefyre",
+  "scripts": {
+    "test": "./test/*.js"
+  },
   "dependencies": {
     "validator": "=3.5.0",
     "restler":">=3.2.0",
@@ -23,16 +27,15 @@
   "engines": {
     "node": ">= 0.10.x"
   },
-  "scripts": {
-    "test": "./test/*.js"
-  },
+
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/livefyre/livefyre-nodejs-utils/issues"
   },
   "licenses": [
     {
-      "type": "MIT"
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/Livefyre/livefyre-nodejs-utils/master/LICENSE"
     }
   ],
   "keywords": [
