@@ -1,0 +1,43 @@
+{
+  "name": "livefyre",
+  "version": "1.0.0",
+  "description": "Livefyre NodeJS utility classes",
+  "author": "Livefyre",
+  "homepage": "https://github.com/livefyre/livefyre-nodejs-utils",
+  "repository": {
+    "type":"git",
+    "url": "https://github.com/livefyre/livefyre-nodejs-utils.git"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "main": "./lib/livefyre", 
+  "dependencies": {
+    "validator": "=3.5.0",
+    "restler":">=3.2.0",
+    "jwt-simple":"=0.2.0"
+  },
+  "devDependencies": {
+    "nodeunit": "0.8.6"
+  },
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "scripts": {
+    "test": "./test/*.js"
+  },
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/livefyre/livefyre-nodejs-utils/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "keywords": [
+    "livefyre",
+    "utils",
+    "api"
+  ],
+}
