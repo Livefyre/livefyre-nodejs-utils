@@ -41,13 +41,13 @@ var network = livefyre.getNetwork('networkName', 'networkKey');
 network.validateLivefyreToken('token');
 ```
 
-To send Livefyre a user sync url and then have Livefyre pull user data from that url:
+To send Livefyre a user sync url and then have Livefyre pull user data from that url: (callbacks are optional for these two methods)
 
 ```node
 var network = livefyre.getNetwork('networkName', 'networkKey');
 
-network.setUserSyncUrl('http://thisisa.test.url/{id}/');
-network.syncUser('system');
+network.setUserSyncUrl('http://thisisa.test.url/{id}/', callback);
+network.syncUser('system', callback);
 ```
 
 To retrieve content collection data:
@@ -56,7 +56,7 @@ To retrieve content collection data:
 var network = livefyre.getNetwork('networkName', 'networkKey');
 
 var site = network.getSite('siteId', 'siteKey');
-site.getCollectionContent(articleId);
+site.getCollectionContent(articleId, callback);
 ```
 
 ## Documentation
