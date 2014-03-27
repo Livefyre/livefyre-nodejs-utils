@@ -60,6 +60,7 @@ site.getCollectionContent(articleId);
 ```
 
 ## Documentation
+
 Located [here](http://livefyre.github.io/livefyre-nodejs-utils/).
 
 ## Contributing
