@@ -5,6 +5,8 @@ Livefyre's official library for common server-side tasks necessary for getting L
 
 ## Installation
 
+Run this line:
+
     npm install livefyre
 
 ## Usage
@@ -14,8 +16,7 @@ Creating tokens:
 **Livefyre token:**
 
 ```node
-var network = livefyre.getNetwork('networkName', 'networkKey');
-network.buildLfToken();
+livefyre.getNetwork('networkName', 'networkKey').buildLfToken();
 ```
 
 **User auth token:**
@@ -31,7 +32,7 @@ network.buildUserAuthToken('userId', 'displayName', expires);
 var network = livefyre.getNetwork('networkName', 'networkKey');
 
 var site = network.getSite('siteId', 'siteKey');
-site.getCollectionMetaToken('title', 'articleId', 'url', 'tag', 'stream');
+site.buildCollectionMetaToken('title', 'articleId', 'url', 'tag', 'stream');
 ```
 
 To validate a Livefyre token:

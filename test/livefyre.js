@@ -34,14 +34,14 @@ exports.unit = {
 
 	'should return a collection meta token': function(test) {
 		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
-		test.ok(site.getCollectionMetaToken('title', 'articleId', 'http://test.com', 'tag'));
+		test.ok(site.buildCollectionMetaToken('title', 'articleId', 'http://test.com', 'tag'));
 		test.done();
 	},
 
-	'should check if getCollectionMetaToken has a valid url and title is less than 256 char': function(test) {
+	'should check if buildCollectionMetaToken has a valid url and title is less than 256 char': function(test) {
 		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
-		test.equals(site.getCollectionMetaToken('title', 'articleId', 'test.com', 'tag'), null);
-		test.equals(site.getCollectionMetaToken('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'articleId', 'http://test.com', 'tag'), null);
+		test.equals(site.buildCollectionMetaToken('title', 'articleId', 'test.com', 'tag'), null);
+		test.equals(site.buildCollectionMetaToken('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'articleId', 'http://test.com', 'tag'), null);
 		test.done();
 	}
 }
