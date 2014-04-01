@@ -23,15 +23,17 @@ livefyre.getNetwork('networkName', 'networkKey').buildLfToken();
 
 ```node
 var network = livefyre.getNetwork(networkName, networkKey);
+
 network.buildUserAuthToken('userId', 'displayName', expires);
 ```
 
 **Collection meta token:**
+The 'stream' argument is optional.
 
 ```node
 var network = livefyre.getNetwork('networkName', 'networkKey');
-
 var site = network.getSite('siteId', 'siteKey');
+
 site.buildCollectionMetaToken('title', 'articleId', 'url', 'tag', 'stream');
 ```
 
@@ -39,6 +41,7 @@ To validate a Livefyre token:
 
 ```node
 var network = livefyre.getNetwork('networkName', 'networkKey');
+
 network.validateLivefyreToken('token');
 ```
 
@@ -48,7 +51,7 @@ To send Livefyre a user sync url and then have Livefyre pull user data from that
 var network = livefyre.getNetwork('networkName', 'networkKey');
 
 // callbacks are optional for these two methods
-network.setUserSyncUrl('http://thisisa.test.url/{id}/', callback);
+network.setUserSyncUrl('url{id}', callback);
 network.syncUser('system', callback);
 ```
 
@@ -56,8 +59,8 @@ To retrieve content collection data:
 
 ```node
 var network = livefyre.getNetwork('networkName', 'networkKey');
-
 var site = network.getSite('siteId', 'siteKey');
+
 site.getCollectionContent(articleId, callback);
 ```
 
