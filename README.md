@@ -7,7 +7,7 @@ Livefyre's official library for common server-side tasks necessary for getting L
 
 Run this line:
 
-    npm install livefyre
+    $ npm install livefyre
 
 ## Usage
 
@@ -42,11 +42,12 @@ var network = livefyre.getNetwork('networkName', 'networkKey');
 network.validateLivefyreToken('token');
 ```
 
-To send Livefyre a user sync url and then have Livefyre pull user data from that url: (callbacks are optional for these two methods)
+To send Livefyre a user sync url and then have Livefyre pull user data from that url:
 
 ```node
 var network = livefyre.getNetwork('networkName', 'networkKey');
 
+// callbacks are optional for these two methods
 network.setUserSyncUrl('http://thisisa.test.url/{id}/', callback);
 network.syncUser('system', callback);
 ```
