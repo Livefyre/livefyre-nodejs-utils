@@ -20,7 +20,7 @@ exports.unit = {
 
 	'should return a token and validate a lf token': function(test) {
 		var network = livefyre.getNetwork('networkName', 'networkKey');
-		var token = network.buildLfToken();
+		var token = network.buildLivefyreToken();
 		test.ok(token);
 		test.ok(network.validateLivefyreToken(token));
 		test.done();
@@ -34,7 +34,7 @@ exports.unit = {
 
 	'should return a collection meta token': function(test) {
 		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
-		test.ok(site.buildCollectionMetaToken('title', 'articleId', 'http://test.com', 'tag'));
+		test.ok(site.buildCollectionMetaToken('title', 'articleId', 'https://www.url.com', 'tags', 'reviews'));
 		test.done();
 	},
 

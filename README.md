@@ -11,57 +11,62 @@ Run this line:
 
 ## Usage
 
-Creating tokens:
-
-**Livefyre token:**
-
-```node
-livefyre.getNetwork('networkName', 'networkKey').buildLfToken();
-```
-
-**User auth token:**
-
-```node
-var network = livefyre.getNetwork(networkName, networkKey);
-
-network.buildUserAuthToken('userId', 'displayName', expires);
-```
-
-**Collection meta token:**
-The 'stream' argument is optional.
+Instantiating a network object:
 
 ```node
 var network = livefyre.getNetwork('networkName', 'networkKey');
-var site = network.getSite('siteId', 'siteKey');
+```
 
-site.buildCollectionMetaToken('title', 'articleId', 'url', 'tag', 'stream');
+Creating a Livefyre token:
+
+```node
+network.buildLivefyreToken();
+```
+
+Creating a user auth token:
+
+```node
+network.buildUserAuthToken('userId', 'displayName', expires);
 ```
 
 To validate a Livefyre token:
 
 ```node
-var network = livefyre.getNetwork('networkName', 'networkKey');
-
-network.validateLivefyreToken('token');
+network.validateLivefyreToken('lfToken');
 ```
 
 To send Livefyre a user sync url and then have Livefyre pull user data from that url:
+*callbacks are optional. defaults will console.log*
 
 ```node
-var network = livefyre.getNetwork('networkName', 'networkKey');
+network.setUserSyncUrl('urlTemplate', callback);
+network.syncUser('userId', callback);
+```
 
-// callbacks are optional for these two methods
-network.setUserSyncUrl('url{id}', callback);
-network.syncUser('system', callback);
+Instantiating a site object:
+
+```node
+var site = network.getSite('siteId', 'siteKey');
+```
+
+Creating a collection meta token:
+*The 'tags' and 'stream' arguments are optional.*
+
+```node
+site.buildCollectionMetaToken('title', 'articleId', 'url', 'tags', 'stream');
 ```
 
 To retrieve content collection data:
 
 ```node
-var network = livefyre.getNetwork('networkName', 'networkKey');
-var site = network.getSite('siteId', 'siteKey');
+site.getCollectionContent('articleId', callback);
+```
 
-site.getCollectionContent(articleId, callback);
+To get a content collection's id:
+*callback is optional. default will console.log*
+
+```Java
+site.getCollectionId('articleId', callback);
 ```
 
 ## Documentation
