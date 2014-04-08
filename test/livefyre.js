@@ -43,5 +43,18 @@ exports.unit = {
 		test.equals(site.buildCollectionMetaToken('title', 'articleId', 'test.com', 'tag'), null);
 		test.equals(site.buildCollectionMetaToken('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'articleId', 'http://test.com', 'tag'), null);
 		test.done();
+	},
+
+	'should return a valid checksum': function(test) {
+		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
+		test.equals(site.buildChecksum('title', 'https://www.url.com', 'tags'), '6e2e4faf7b95f896260fe695eafb34ba');
+		test.done();
+	},
+
+	'should check if buildChecksum has a valid url and title is less than 256 char': function(test) {
+		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
+		test.equals(site.buildChecksum('title', 'test.com', 'tag'), null);
+		test.equals(site.buildChecksum('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'http://test.com', 'tag'), null);
+		test.done();
 	}
 }

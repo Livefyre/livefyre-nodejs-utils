@@ -49,11 +49,18 @@ Instantiating a site object:
 var site = network.getSite('siteId', 'siteKey');
 ```
 
-Creating a collection meta token:
+Building a collection meta token:
 *The 'tags' and 'stream' arguments are optional.*
 
 ```node
 site.buildCollectionMetaToken('title', 'articleId', 'url', 'tags', 'stream');
+```
+
+Building a checksum:
+*The 'tags' argument is optional.*
+
+```node
+site.buildChecksum('title', url', 'tags');
 ```
 
 To retrieve content collection data:
