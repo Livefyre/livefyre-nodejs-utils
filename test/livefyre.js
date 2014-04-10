@@ -56,5 +56,19 @@ exports.unit = {
 		test.equals(site.buildChecksum('title', 'test.com', 'tag'), null);
 		test.equals(site.buildChecksum('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'http://test.com', 'tag'), null);
 		test.done();
+	},
+
+	'should check different variations of valid and invalid urls': function(test) {
+		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
+
+		test.equals(site.buildChecksum('', 'test.com', ''), null);
+		test.ok(site.buildChecksum('', 'http://test.com:8000', ''), null);
+		test.ok(site.buildChecksum('', 'https://test.com/', ''), null);
+		test.ok(site.buildChecksum('', 'ftp://test.com/', ''), null);
+		test.ok(site.buildChecksum('', "https://test.com/path/test.-_~!$&'()*+,=:@/dash", ''), null);
+		test.ok(site.buildChecksum('', 'http://清华大学.cn', ''));
+        test.ok(site.buildChecksum('', 'http://www.mysite.com/myresumé.html', ''));
+
+		test.done();
 	}
 }
