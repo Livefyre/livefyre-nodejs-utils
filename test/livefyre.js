@@ -1,4 +1,5 @@
-var livefyre = require('../lib/livefyre.js');
+var livefyre = require('../lib/livefyre.js'),
+	jwt = require('jwt-simple');
 
 
 exports.unit = {
@@ -34,7 +35,7 @@ exports.unit = {
 
 	'should return a collection meta token': function(test) {
 		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
-		test.ok(site.buildCollectionMetaToken('title', 'articleId', 'https://www.url.com', 'tags', 'reviews'));
+		test.ok(site.buildCollectionMetaToken('title', 'articleId', 'http://livefyre.com', 'tags'));
 		test.done();
 	},
 
@@ -42,6 +43,21 @@ exports.unit = {
 		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
 		test.equals(site.buildCollectionMetaToken('title', 'articleId', 'test.com', 'tag'), null);
 		test.equals(site.buildCollectionMetaToken('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'articleId', 'http://test.com', 'tag'), null);
+		test.done();
+	},
+
+	'should check various strings for type and ensure that they are set in the correct field': function(test) {
+		var site = livefyre.getNetwork('networkName', 'networkKey').getSite('siteId', 'siteKey');
+		
+		var token = site.buildCollectionMetaToken('title', 'articleId', 'http://livefyre.com', 'tag', 'reviews');
+		var decoded = jwt.decode(token, 'siteKey');
+		test.equals(jwt.decode(token, 'siteKey')['type'], 'reviews');
+
+		token = site.buildCollectionMetaToken('title', 'articleId', 'http://livefyre.com', 'tag', 'liveblog');
+		decoded = jwt.decode(token, 'siteKey');
+
+		test.equals(jwt.decode(token, 'siteKey')['stream_type'], 'liveblog');
+
 		test.done();
 	},
 
