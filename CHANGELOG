@@ -1,5 +1,7 @@
-=== 1.1.3 2014-04-23
+=== 1.1.4 2014-05-07
 
-* Renaming stream to type and adding checks to make sure that type is of a recognized type. Adding legacy stream_type support.
+* Added rating, counting as acceptable types. Removed stream_type.
+
+* Renamed stream to type and added checks to make sure that type is of a recognized type. Added legacy stream_type support.
 
 * Added changelog.

@@ -56,7 +56,7 @@ exports.unit = {
 		token = site.buildCollectionMetaToken('title', 'articleId', 'http://livefyre.com', 'tag', 'liveblog');
 		decoded = jwt.decode(token, 'siteKey');
 
-		test.equals(jwt.decode(token, 'siteKey')['stream_type'], 'liveblog');
+		test.equals(jwt.decode(token, 'siteKey')['type'], 'liveblog');
 
 		test.done();
 	},
