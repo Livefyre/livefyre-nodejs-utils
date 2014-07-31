@@ -6,6 +6,7 @@
 * Refactored classes to match other libraries.
 * Updated createCollectionMeta() to accept a map of optional params instead of tag/type.
 * Updated checksum formula.
+* Callbacks are no longer optional and param placement has been moved to accentuate that. The manner in which callbacks are used has also been updated so that callbacks are called with specific results.
 
 === 1.1.4 2014-05-07
 

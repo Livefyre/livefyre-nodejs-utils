@@ -36,11 +36,10 @@ network.validateLivefyreToken('lfToken');
 ```
 
 To send Livefyre a user sync url and then have Livefyre pull user data from that url:
-*callbacks are optional. defaults will console.log*
 
 ```node
-network.setUserSyncUrl('urlTemplate', callback);
-network.syncUser('userId', callback);
+network.setUserSyncUrl(callback, 'urlTemplate');
+network.syncUser(callback, 'userId');
 ```
 
 Instantiating a site object:
@@ -50,10 +49,10 @@ var site = network.getSite('siteId', 'siteKey');
 ```
 
 Building a collection meta token:
-*The 'tags' and 'type' arguments are optional.*
+*The {options} argument is optional.*
 
 ```node
-site.buildCollectionMetaToken('title', 'articleId', 'url', 'tags', 'type');
+site.buildCollectionMetaToken('title', 'articleId', 'url', {options});
 ```
 
 Building a checksum:
@@ -66,17 +65,16 @@ site.buildChecksum('title', url', 'tags');
 To retrieve content collection data:
 
 ```node
-site.getCollectionContent('articleId', callback);
+site.getCollectionContent(callback, 'articleId');
 ```
 
 To get a content collection's id:
-*callback is optional. default will console.log*
 
 ```Java
-site.getCollectionId('articleId', callback);
+site.getCollectionId(callback, 'articleId');
 ```
 
-## Documentation
+## Additional Documentation
 
 Located [here](http://answers.livefyre.com/developers/libraries).
 
