@@ -60,7 +60,7 @@ exports.unit = {
         test.ok(site.buildChecksum('', 'http://www.mysite.com/myresumé.html', ''));
 
 		test.done();
-	},
+	}/*,
 
 	'should test basic site api calls': function(test) {
 		test.expect(1);
@@ -71,5 +71,5 @@ exports.unit = {
 		};
 
 		site.getCollectionId(one, Constants.ARTICLE_ID);
-	}
+	}*/
 }
