@@ -1,9 +1,8 @@
 var livefyre = require('../../lib/livefyre.js'),
 	jwt = require('jwt-simple');
 
-var Topic = require('../../lib/entity/topic.js');
-
-var Constants = require('../constants.js');
+var Topic = require('../../lib/entity/topic.js'),
+	Constants = require('../constants.js');
 
 exports.unit = {
 	setUp: function (callback) {
@@ -61,7 +60,7 @@ exports.unit = {
         test.ok(site.buildChecksum('', 'http://www.mysite.com/myresumé.html', ''));
 
 		test.done();
-	}/*,
+	},
 
 	'should test basic site api calls': function(test) {
 		test.expect(1);
@@ -72,70 +71,5 @@ exports.unit = {
 		};
 
 		site.getCollectionId(one, Constants.ARTICLE_ID);
-	},
-
-	'should test site topic api calls': function(test) {
-		test.expect(3);
-
-		var one = function(result) {
-			test.equal(result.created, 1);
-			site.getTopic(two, '1');
-		};
-		var two = function(result) {
-			test.equal(result.label, 'ONE');
-			site.deleteTopic(three, result);
-		};
-		var three = function(result) {
-			test.equal(result, 1);
-			test.done();
-		};
-
-		site.createOrUpdateTopic(one, '1', 'ONE');
-	},
-
-	'should test site topics api calls': function(test) {
-		test.expect(3);
-
-		var one = function(result) {
-			test.equal(result.created, 2);
-			site.getTopics(two);
-		};
-		var two = function(result) {
-			test.equal(result.length, 2);
-			site.deleteTopics(three, result);
-		};
-		var three = function(result) {
-			test.equal(result, 2);
-			test.done();
-		};
-
-		site.createOrUpdateTopics(one, { 2: 'TWO', 3: 'THREE' });
-	},
-
-	'should test site collection topic api calls': function(test) {
-		test.expect(4);
-
-		var topics = site.createOrUpdateTopics(function(result) {}, { 2: 'TWO', 3: 'THREE' });
-		var one = function(result) {
-			test.equal(result, 2);
-			site.getCollectionTopics(two, Constants.COLLECTION_ID);
-		};
-		var two = function(result) {
-			test.equal(result.length, 2);
-			site.updateCollectionTopics(three, Constants.COLLECTION_ID, [topics[0]]);
-		};
-		var three = function(result) {
-			test.equal(result.removed, 1);
-			site.removeCollectionTopics(four, Constants.COLLECTION_ID, [topics[0]]);
-		};
-		var four = function(result) {
-			test.equal(result, 1);
-			site.deleteTopics(five, topics);
-		};
-		var five = function(result) {
-			test.done();
-		};
-
-		site.addCollectionTopics(one, Constants.COLLECTION_ID, topics);
-	}*/
+	}
 }
