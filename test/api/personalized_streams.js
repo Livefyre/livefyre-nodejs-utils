@@ -17,7 +17,7 @@ exports.unit = {
 		test.expect(3);
 
 		var one = function(result) {
-			test.equal(result.created, 1);
+			test.equal(result.length, 1);
 			PSClient.getTopic(two, network, '1'); 
 		};
 		var two = function(result) {
@@ -36,7 +36,7 @@ exports.unit = {
 		test.expect(3);
 
 		var one = function(result) {
-			test.equal(result.created, 2);
+			test.equal(result.length, 2);
 			PSClient.getTopics(two, network);
 		};
 		var two = function(result) {
@@ -53,6 +53,7 @@ exports.unit = {
 
 	'should test network subscription api calls': function(test) {
 		test.expect(5);
+		var userToken = network.buildUserAuthToken(Constants.USER_ID, Constants.USER_ID + '@' + Constants.NETWORK_NAME, network.DEFAULT_EXPIRES);
 
 		var topics = PSClient.createOrUpdateTopics(function(result) {}, network, [{ key: 2, value: 'TWO'}, { key: 3, value: 'THREE' }]);
 		var one = function(result) {
@@ -61,16 +62,15 @@ exports.unit = {
 		};
 		var two = function(result) {
 			test.equal(result.length, 2);
-			PSClient.replaceSubscriptions(three, network, Constants.USER_ID, [topics[0]]);
+			PSClient.replaceSubscriptions(three, network, userToken, [topics[0]]);
 		};
 		var three = function(result) {
 			test.equal(result.removed, 1);
 			PSClient.getSubscribers(four, network, topics[0]);
 		};
 		var four = function(result) {
-			console.log(result);
 			test.equal(result.length, 1);
-			PSClient.removeSubscriptions(five, network, Constants.USER_ID, [topics[0]]);
+			PSClient.removeSubscriptions(five, network, userToken, [topics[0]]);
 		};
 		var five = function(result) {
 			test.equal(result, 1);
@@ -80,7 +80,7 @@ exports.unit = {
 			test.done();
 		};
 
-		PSClient.addSubscriptions(one, network, Constants.USER_ID, topics);
+		PSClient.addSubscriptions(one, network, userToken, topics);
 	},
 
 	'tests cursors': function(test) {
@@ -101,7 +101,7 @@ exports.unit = {
 		test.expect(3);
 
 		var one = function(result) {
-			test.equal(result.created, 1);
+			test.equal(result.length, 1);
 			PSClient.getTopic(two, site, '1');
 		};
 		var two = function(result) {
@@ -120,7 +120,7 @@ exports.unit = {
 		test.expect(3);
 
 		var one = function(result) {
-			test.equal(result.created, 2);
+			test.equal(result.length, 2);
 			PSClient.getTopics(two, site);
 		};
 		var two = function(result) {
