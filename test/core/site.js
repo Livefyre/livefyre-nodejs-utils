@@ -65,11 +65,17 @@ exports.unit = {
 	'should test basic site api calls': function(test) {
 		test.expect(1);
 
+		var name = 'NodeJSCreateCollection'+new Date();
+
 		var one = function(collectionId) {
-			test.equal(collectionId, Constants.COLLECTION_ID);
-			test.done();
+			var two = function(otherId) {
+				test.equal(collectionId, otherId);
+				test.done();
+			}
+
+			site.getCollectionId(two, name);
 		};
 
-		site.getCollectionId(one, Constants.ARTICLE_ID);
+		site.createCollection(one, name, name, 'http://answers.livefyre.com/NODEJS');
 	}*/
 }
