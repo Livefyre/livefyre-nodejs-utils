@@ -2,6 +2,7 @@
 
 *** CAUTION: THIS VERSION HAS UPDATED METHODS THAT MAKE PREVIOUS FUNCTION CALLS OBSOLETE ***
 * Added personalized streams and timeline support.
+* Added createCollection method.
 * Updated some calls to use SSL.
 * Refactored classes to match other libraries.
 * Updated createCollectionMeta() to accept a map of optional params instead of tag/type.
