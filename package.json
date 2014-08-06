@@ -1,6 +1,6 @@
 {
   "name": "livefyre",
-  "version": "1.1.4",
+  "version": "1.3.0",
   "description": "Livefyre NodeJS utility classes",
   "author": "Livefyre <tools@livefyre.com> (https://github.com/livefyre)",
   "homepage": "https://github.com/livefyre/livefyre-nodejs-utils",
@@ -14,7 +14,7 @@
   },
   "main": "./lib/livefyre",
   "scripts": {
-    "test": "./test/*.js"
+    "test": "nodeunit test/core"
   },
   "dependencies": {
     "validator": "=3.5.0",
