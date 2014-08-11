@@ -21,18 +21,18 @@ exports.unit = {
 
 		var one = function(result) {
 			test.equal(result.length, 1);
-			PersonalizedStream.getTopic(two, network, '1'); 
+			PersonalizedStream.getTopic(network, '1', two); 
 		};
 		var two = function(result) {
 			test.equal(result.label, 'ONE');
-			PersonalizedStream.deleteTopic(three, network, result); 
+			PersonalizedStream.deleteTopic(network, result, three); 
 		};
 		var three = function(result) {
 			test.equal(result, 1);
 			test.done();
 		};
 
-		PersonalizedStream.createOrUpdateTopic(one, network, '1', 'ONE');
+		PersonalizedStream.createOrUpdateTopic(network, '1', 'ONE', one);
 	},
 
 	'should test network topics api calls': function(test) {
@@ -40,50 +40,50 @@ exports.unit = {
 
 		var one = function(result) {
 			test.equal(result.length, 2);
-			PersonalizedStream.getTopics(two, network);
+			PersonalizedStream.getTopics(network, two);
 		};
 		var two = function(result) {
 			test.equal(result.length, 2);
-			PersonalizedStream.deleteTopics(three, network, result);
+			PersonalizedStream.deleteTopics(network, result, three);
 		};
 		var three = function(result) {
 			test.equal(result, 2);
 			test.done();
 		};
 
-		PersonalizedStream.createOrUpdateTopics(one, network, [{ key: 2, value: 'TWO' }, { key: 3, value: 'THREE' }]);
+		PersonalizedStream.createOrUpdateTopics(network, [{ key: 2, value: 'TWO' }, { key: 3, value: 'THREE' }], one);
 	},
 
 	'should test network subscription api calls': function(test) {
 		test.expect(5);
 		var userToken = network.buildUserAuthToken(constants.USER_ID, constants.USER_ID + '@' + constants.NETWORK_NAME, network.DEFAULT_EXPIRES);
 
-		var topics = PersonalizedStream.createOrUpdateTopics(function(result) {}, network, [{ key: 2, value: 'TWO'}, { key: 3, value: 'THREE' }]);
+		var topics = PersonalizedStream.createOrUpdateTopics(network, [{ key: 2, value: 'TWO'}, { key: 3, value: 'THREE' }], function(result) {});
 		var one = function(result) {
 			test.equal(result, 2);
-			PersonalizedStream.getSubscriptions(two, network, constants.USER_ID);
+			PersonalizedStream.getSubscriptions(network, constants.USER_ID, two);
 		};
 		var two = function(result) {
 			test.equal(result.length, 2);
-			PersonalizedStream.replaceSubscriptions(three, network, userToken, [topics[0]]);
+			PersonalizedStream.replaceSubscriptions(network, userToken, [topics[0]], three);
 		};
 		var three = function(result) {
 			test.equal(result.removed, 1);
-			PersonalizedStream.getSubscribers(four, network, topics[0]);
+			PersonalizedStream.getSubscribers(network, topics[0], four);
 		};
 		var four = function(result) {
 			test.equal(result.length, 1);
-			PersonalizedStream.removeSubscriptions(five, network, userToken, [topics[0]]);
+			PersonalizedStream.removeSubscriptions(network, userToken, [topics[0]], five);
 		};
 		var five = function(result) {
 			test.equal(result, 1);
-			PersonalizedStream.deleteTopics(six, network, topics);
+			PersonalizedStream.deleteTopics(network, topics, six);
 		};
 		var six = function(result) {
 			test.done();
 		};
 
-		PersonalizedStream.addSubscriptions(one, network, userToken, topics);
+		PersonalizedStream.addSubscriptions(network, userToken, topics, one);
 	},
 
 	'tests cursors': function(test) {
@@ -94,7 +94,7 @@ exports.unit = {
 			test.done();
 		};
 
-		var cursor = CursorFactory.getPersonalStreamCursor(one, network, constants.USER_ID);
+		var cursor = CursorFactory.getPersonalStreamCursor(network, constants.USER_ID, one);
 
 		cursor.next();
 		// cursor.previous();
@@ -105,18 +105,18 @@ exports.unit = {
 
 		var one = function(result) {
 			test.equal(result.length, 1);
-			PersonalizedStream.getTopic(two, site, '1');
+			PersonalizedStream.getTopic(site, '1', two);
 		};
 		var two = function(result) {
 			test.equal(result.label, 'ONE');
-			PersonalizedStream.deleteTopic(three, site, result);
+			PersonalizedStream.deleteTopic(site, result, three);
 		};
 		var three = function(result) {
 			test.equal(result, 1);
 			test.done();
 		};
 
-		PersonalizedStream.createOrUpdateTopic(one, site, '1', 'ONE');
+		PersonalizedStream.createOrUpdateTopic(site, '1', 'ONE', one);
 	},
 
 	'should test site topics api calls': function(test) {
@@ -124,44 +124,44 @@ exports.unit = {
 
 		var one = function(result) {
 			test.equal(result.length, 2);
-			PersonalizedStream.getTopics(two, site);
+			PersonalizedStream.getTopics(site, two);
 		};
 		var two = function(result) {
 			test.equal(result.length, 2);
-			PersonalizedStream.deleteTopics(three, site, result);
+			PersonalizedStream.deleteTopics(site, result, three);
 		};
 		var three = function(result) {
 			test.equal(result, 2);
 			test.done();
 		};
 
-		PersonalizedStream.createOrUpdateTopics(one, site, [{ key: 2, value: 'TWO' }, { key: 3, value: 'THREE' }]);
+		PersonalizedStream.createOrUpdateTopics(site, [{ key: 2, value: 'TWO' }, { key: 3, value: 'THREE' }], one);
 	},
 
 	'should test site collection topic api calls': function(test) {
 		test.expect(4);
 
-		var topics = PersonalizedStream.createOrUpdateTopics(function(result) {}, site, [{ key: 2, value: 'TWO' }, { key: 3, value: 'THREE' }]);
+		var topics = PersonalizedStream.createOrUpdateTopics(site, [{ key: 2, value: 'TWO' }, { key: 3, value: 'THREE' }], function(result) {});
 		var one = function(result) {
 			test.equal(result, 2);
-			PersonalizedStream.getCollectionTopics(two, site, constants.COLLECTION_ID);
+			PersonalizedStream.getCollectionTopics(site, constants.COLLECTION_ID, two);
 		};
 		var two = function(result) {
 			test.equal(result.length, 2);
-			PersonalizedStream.replaceCollectionTopics(three, site, constants.COLLECTION_ID, [topics[0]]);
+			PersonalizedStream.replaceCollectionTopics(site, constants.COLLECTION_ID, [topics[0]], three);
 		};
 		var three = function(result) {
 			test.equal(result.removed, 1);
-			PersonalizedStream.removeCollectionTopics(four, site, constants.COLLECTION_ID, [topics[0]]);
+			PersonalizedStream.removeCollectionTopics(site, constants.COLLECTION_ID, [topics[0]], four);
 		};
 		var four = function(result) {
 			test.equal(result, 1);
-			PersonalizedStream.deleteTopics(five, site, topics);
+			PersonalizedStream.deleteTopics(site, topics, five);
 		};
 		var five = function(result) {
 			test.done();
 		};
 
-		PersonalizedStream.addCollectionTopics(one, site, constants.COLLECTION_ID, topics);
+		PersonalizedStream.addCollectionTopics(site, constants.COLLECTION_ID, topics, one);
 	}
 }

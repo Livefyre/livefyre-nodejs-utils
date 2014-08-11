@@ -1,5 +1,6 @@
 var livefyre = require('../../lib/livefyre.js'),
-	jwt = require('jwt-simple');
+	jwt = require('jwt-simple'),
+	util = require('util');
 
 var Topic = require('../../lib/entity/topic.js'),
 	Constants = require('../constants.js');
@@ -23,8 +24,8 @@ exports.unit = {
 	},
 
 	'should check if buildCollectionMetaToken has a valid url and title is less than 256 char': function(test) {
-		test.equals(site.buildCollectionMetaToken('title', 'articleId', 'test.com'), null);
-		test.equals(site.buildCollectionMetaToken('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'articleId', 'http://test.com'), null);
+		test.ok(util.isError(site.buildCollectionMetaToken('title', 'articleId', 'test.com')));
+		test.ok(util.isError(site.buildCollectionMetaToken('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'articleId', 'http://test.com')));
 		test.done();
 	},
 
@@ -47,22 +48,22 @@ exports.unit = {
 	},
 
 	'should check if buildChecksum has a valid url and title is less than 256 char': function(test) {
-		test.equals(site.buildChecksum('title', 'test.com', 'tag'), null);
-		test.equals(site.buildChecksum('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'http://test.com', 'tag'), null);
+		test.ok(util.isError(site.buildChecksum('title', 'test.com', 'tag')));
+		test.ok(util.isError(site.buildChecksum('1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456', 'http://test.com', 'tag')));
 		test.done();
 	},
 
 	'should check different variations of valid and invalid urls': function(test) {
-		test.equals(site.buildChecksum('', 'test.com', ''), null);
-		test.ok(site.buildChecksum('', 'http://test.com:8000', ''), null);
-		test.ok(site.buildChecksum('', 'https://test.com/', ''), null);
-		test.ok(site.buildChecksum('', 'ftp://test.com/', ''), null);
-		test.ok(site.buildChecksum('', "https://test.com/path/test.-_~!$&'()*+,=:@/dash", ''), null);
+		test.ok(util.isError(site.buildChecksum('', 'test.com', '')));
+		test.ok(site.buildChecksum('', 'http://test.com:8000', ''));
+		test.ok(site.buildChecksum('', 'https://test.com/', ''));
+		test.ok(site.buildChecksum('', 'ftp://test.com/', ''));
+		test.ok(site.buildChecksum('', "https://test.com/path/test.-_~!$&'()*+,=:@/dash", ''));
 		test.ok(site.buildChecksum('', 'http://清华大学.cn', ''));
         test.ok(site.buildChecksum('', 'http://www.mysite.com/myresumé.html', ''));
 
 		test.done();
-	}/*,
+	},
 
 	'should test basic site api calls': function(test) {
 		test.expect(1);
@@ -75,9 +76,9 @@ exports.unit = {
 				test.done();
 			}
 
-			site.getCollectionId(two, name);
+			site.getCollectionId(name, two);
 		};
 
-		site.createCollection(one, name, name, 'http://answers.livefyre.com/NODEJS');
-	}*/
+		site.createCollection(name, name, 'http://answers.livefyre.com/NODEJS', one);
+	}
 }

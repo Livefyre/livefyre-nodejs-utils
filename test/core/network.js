@@ -1,5 +1,6 @@
 var livefyre = require('../../lib/livefyre.js'),
-	jwt = require('jwt-simple');
+	jwt = require('jwt-simple'),
+	util = require('util');
 
 var Topic = require('../../lib/entity/topic.js');
 
@@ -18,8 +19,10 @@ exports.unit = {
     },
 
 	'should not allow urls without {id} in setUserSyncUrl': function(test) {
-		test.equal(network.setUserSyncUrl('url'), null);
-		test.done();
+		network.setUserSyncUrl('url', function(result) {
+			test.ok(util.isError(result));
+			test.done();
+		});
 	},
 
 	'should return a token and validate a lf token': function(test) {
@@ -30,15 +33,15 @@ exports.unit = {
 	},
 
 	'should return null for non-alphanumeric user ids': function(test) {
-		test.equal(network.buildUserAuthToken('test.-f12', 'test', 100.0), null);
+		test.ok(util.isError(network.buildUserAuthToken('test.-f12', 'test', 100.0)));
 		test.done();
-	}/*,
+	},
 
 	'should test basic network api calls': function (test) {
 		var one = function(result) { 
-			network.syncUser(function(result) { test.done(); }, 'user');
+			network.syncUser('user', function(result) { test.done(); });
 		};
 
-		network.setUserSyncUrl(one, 'url/{id}');
-	}*/
+		network.setUserSyncUrl('url/{id}', one);
+	}
 }

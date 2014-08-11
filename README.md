@@ -38,8 +38,8 @@ network.validateLivefyreToken('lfToken');
 To send Livefyre a user sync url and then have Livefyre pull user data from that url:
 
 ```node
-network.setUserSyncUrl(callback, 'urlTemplate');
-network.syncUser(callback, 'userId');
+network.setUserSyncUrl('urlTemplate', callback);
+network.syncUser('userId', callback);
 ```
 
 Instantiating a site object:
@@ -65,13 +65,13 @@ site.buildChecksum('title', url', 'tags');
 To retrieve content collection data:
 
 ```node
-site.getCollectionContent(callback, 'articleId');
+site.getCollectionContent('articleId', callback);
 ```
 
 To get a content collection's id:
 
 ```Java
-site.getCollectionId(callback, 'articleId');
+site.getCollectionId('articleId', callback);
 ```
 
 ## Additional Documentation
