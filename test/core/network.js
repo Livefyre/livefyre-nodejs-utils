@@ -7,7 +7,9 @@ var Constants = require('../constants.js');
 
 exports.unit = {
 	setUp: function (callback) {
-        network = livefyre.getNetwork(Constants.NETWORK_NAME, Constants.NETWORK_KEY);
+		constants = new Constants();
+		constants.setPropValues(Constants.Environments.prod);
+        network = livefyre.getNetwork(constants.NETWORK_NAME, constants.NETWORK_KEY);
         callback();
     },
 

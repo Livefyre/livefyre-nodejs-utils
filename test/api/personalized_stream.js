@@ -8,8 +8,11 @@ var PersonalizedStream = require('../../lib/api/personalized_stream.js'),
 
 exports.unit = {
 	setUp: function (callback) {
-        network = livefyre.getNetwork(Constants.NETWORK_NAME, Constants.NETWORK_KEY);
-        site = network.getSite(Constants.SITE_ID, Constants.SITE_KEY);
+		constants = new Constants();
+		constants.setPropValues(Constants.Environments.prod);
+        network = livefyre.getNetwork(constants.NETWORK_NAME, constants.NETWORK_KEY);
+        // network.ssl = false;
+        site = network.getSite(constants.SITE_ID, constants.SITE_KEY);
         callback();
     },
 
@@ -53,12 +56,12 @@ exports.unit = {
 
 	'should test network subscription api calls': function(test) {
 		test.expect(5);
-		var userToken = network.buildUserAuthToken(Constants.USER_ID, Constants.USER_ID + '@' + Constants.NETWORK_NAME, network.DEFAULT_EXPIRES);
+		var userToken = network.buildUserAuthToken(constants.USER_ID, constants.USER_ID + '@' + constants.NETWORK_NAME, network.DEFAULT_EXPIRES);
 
 		var topics = PersonalizedStream.createOrUpdateTopics(function(result) {}, network, [{ key: 2, value: 'TWO'}, { key: 3, value: 'THREE' }]);
 		var one = function(result) {
 			test.equal(result, 2);
-			PersonalizedStream.getSubscriptions(two, network, Constants.USER_ID);
+			PersonalizedStream.getSubscriptions(two, network, constants.USER_ID);
 		};
 		var two = function(result) {
 			test.equal(result.length, 2);
@@ -91,7 +94,7 @@ exports.unit = {
 			test.done();
 		};
 
-		var cursor = CursorFactory.getPersonalStreamCursor(one, network, Constants.USER_ID);
+		var cursor = CursorFactory.getPersonalStreamCursor(one, network, constants.USER_ID);
 
 		cursor.next();
 		// cursor.previous();
@@ -141,15 +144,15 @@ exports.unit = {
 		var topics = PersonalizedStream.createOrUpdateTopics(function(result) {}, site, [{ key: 2, value: 'TWO' }, { key: 3, value: 'THREE' }]);
 		var one = function(result) {
 			test.equal(result, 2);
-			PersonalizedStream.getCollectionTopics(two, site, Constants.COLLECTION_ID);
+			PersonalizedStream.getCollectionTopics(two, site, constants.COLLECTION_ID);
 		};
 		var two = function(result) {
 			test.equal(result.length, 2);
-			PersonalizedStream.replaceCollectionTopics(three, site, Constants.COLLECTION_ID, [topics[0]]);
+			PersonalizedStream.replaceCollectionTopics(three, site, constants.COLLECTION_ID, [topics[0]]);
 		};
 		var three = function(result) {
 			test.equal(result.removed, 1);
-			PersonalizedStream.removeCollectionTopics(four, site, Constants.COLLECTION_ID, [topics[0]]);
+			PersonalizedStream.removeCollectionTopics(four, site, constants.COLLECTION_ID, [topics[0]]);
 		};
 		var four = function(result) {
 			test.equal(result, 1);
@@ -159,6 +162,6 @@ exports.unit = {
 			test.done();
 		};
 
-		PersonalizedStream.addCollectionTopics(one, site, Constants.COLLECTION_ID, topics);
+		PersonalizedStream.addCollectionTopics(one, site, constants.COLLECTION_ID, topics);
 	}
 }
