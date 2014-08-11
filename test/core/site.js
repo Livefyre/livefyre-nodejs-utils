@@ -6,8 +6,10 @@ var Topic = require('../../lib/entity/topic.js'),
 
 exports.unit = {
 	setUp: function (callback) {
-        network = livefyre.getNetwork(Constants.NETWORK_NAME, Constants.NETWORK_KEY);
-        site = network.getSite(Constants.SITE_ID, Constants.SITE_KEY);
+		constants = new Constants();
+		constants.setPropValues(Constants.Environments.prod);
+        network = livefyre.getNetwork(constants.NETWORK_NAME, constants.NETWORK_KEY);
+        site = network.getSite(constants.SITE_ID, constants.SITE_KEY);
         callback();
     },
 
@@ -28,13 +30,13 @@ exports.unit = {
 
 	'should check various strings for type and ensure that they are set in the correct field': function(test) {
 		var token = site.buildCollectionMetaToken('title', 'articleId', 'http://livefyre.com', { tags: 'tag', type: 'reviews' });
-		var decoded = jwt.decode(token, Constants.SITE_KEY);
-		test.equals(jwt.decode(token, Constants.SITE_KEY)['type'], 'reviews');
+		var decoded = jwt.decode(token, constants.SITE_KEY);
+		test.equals(jwt.decode(token, constants.SITE_KEY)['type'], 'reviews');
 
 		token = site.buildCollectionMetaToken('title', 'articleId', 'http://livefyre.com', { tags: 'tag', type: 'liveblog' });
-		decoded = jwt.decode(token, Constants.SITE_KEY);
+		decoded = jwt.decode(token, constants.SITE_KEY);
 
-		test.equals(jwt.decode(token, Constants.SITE_KEY)['type'], 'liveblog');
+		test.equals(jwt.decode(token, constants.SITE_KEY)['type'], 'liveblog');
 
 		test.done();
 	},
