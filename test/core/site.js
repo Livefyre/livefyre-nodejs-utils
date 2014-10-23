@@ -1,14 +1,12 @@
-var livefyre = require('../../lib/livefyre.js'),
-	jwt = require('jwt-simple'),
-	util = require('util');
+var livefyre = require('../../lib/livefyre.js');
+var	jwt = require('jwt-simple');
+var	util = require('util');
 
-var Topic = require('../../lib/entity/topic.js'),
-	Constants = require('../constants.js');
+var Topic = require('../../lib/dto/topic.js');
+var constants = require('../constants.js');
 
 exports.unit = {
 	setUp: function (callback) {
-		constants = new Constants();
-		constants.setPropValues(Constants.Environments.prod);
         network = livefyre.getNetwork(constants.NETWORK_NAME, constants.NETWORK_KEY);
         site = network.getSite(constants.SITE_ID, constants.SITE_KEY);
         callback();
@@ -63,7 +61,7 @@ exports.unit = {
         test.ok(site.buildChecksum('', 'http://www.mysite.com/myresumé.html', ''));
 
 		test.done();
-	}/*,
+	},
 
 	'should test basic site api calls': function(test) {
 		test.expect(1);
@@ -74,11 +72,11 @@ exports.unit = {
 			var two = function(otherId) {
 				test.equal(collectionId, otherId);
 				test.done();
-			}
+			};
 
 			site.getCollectionId(name, two);
 		};
 
-		site.createCollection(name, name, 'http://answers.livefyre.com/NODEJS', one);
-	}*/
-}
+		site.buildCollection(name, name, 'http://answers.livefyre.com/NODEJS', one);
+	}
+};

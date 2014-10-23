@@ -1,15 +1,13 @@
-var livefyre = require('../../lib/livefyre.js'),
-	jwt = require('jwt-simple'),
-	util = require('util');
+var livefyre = require('../../lib/livefyre');
+var	jwt = require('jwt-simple');
+var	util = require('util');
 
-var Topic = require('../../lib/entity/topic.js');
+var Topic = require('../../lib/dto/topic.js');
+var constants = require('../constants.js');
 
-var Constants = require('../constants.js');
 
 exports.unit = {
 	setUp: function (callback) {
-		constants = new Constants();
-		constants.setPropValues(Constants.Environments.prod);
         network = livefyre.getNetwork(constants.NETWORK_NAME, constants.NETWORK_KEY);
         callback();
     },
@@ -35,13 +33,13 @@ exports.unit = {
 	'should return null for non-alphanumeric user ids': function(test) {
 		test.ok(util.isError(network.buildUserAuthToken('test.-f12', 'test', 100.0)));
 		test.done();
-	}/*,
+	},
 
 	'should test basic network api calls': function (test) {
-		var one = function(result) { 
-			network.syncUser('user', function(result) { test.done(); });
+		var one = function() {
+			network.syncUser('user', function() { test.done(); });
 		};
 
 		network.setUserSyncUrl('url/{id}', one);
-	}*/
-}
+	}
+};

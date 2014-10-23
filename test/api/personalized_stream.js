@@ -1,17 +1,14 @@
-var livefyre = require('../../lib/livefyre.js'),
-	jwt = require('jwt-simple');
+var livefyre = require('../../lib/livefyre.js');
+var jwt = require('jwt-simple');
 
-var PersonalizedStream = require('../../lib/api/personalized_stream.js'),
-	CursorFactory = require('../../lib/factory/cursor_factory.js'),
-	Topic = require('../../lib/entity/topic.js'),
-	Constants = require('../constants.js');
+var PersonalizedStream = require('../../lib/api/personalized_stream.js');
+var	CursorFactory = require('../../lib/factory/cursor_factory.js');
+var	Topic = require('../../lib/dto/topic.js');
+var	constants = require('../constants.js');
 
 exports.unit = {
 	setUp: function (callback) {
-		constants = new Constants();
-		constants.setPropValues(Constants.Environments.prod);
         network = livefyre.getNetwork(constants.NETWORK_NAME, constants.NETWORK_KEY);
-        // network.ssl = false;
         site = network.getSite(constants.SITE_ID, constants.SITE_KEY);
         callback();
     },
@@ -164,4 +161,4 @@ exports.unit = {
 
 		PersonalizedStream.addCollectionTopics(site, constants.COLLECTION_ID, topics, one);
 	}
-}
+};
