@@ -14,7 +14,7 @@
   },
   "main": "./lib/livefyre",
   "scripts": {
-    "test": "nodeunit test/core"
+    "test": "nodeunit test/*"
   },
   "dependencies": {
     "validator": "=3.5.0",

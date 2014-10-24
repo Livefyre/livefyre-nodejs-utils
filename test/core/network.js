@@ -1,19 +1,48 @@
+var c = require('../constants');
 var livefyre = require('../../lib/livefyre');
 var	jwt = require('jwt-simple');
 var	util = require('util');
 
-var Topic = require('../../lib/dto/topic.js');
-var constants = require('../constants.js');
+var Network = require('../../lib/core/network');
 
 
 exports.unit = {
 	setUp: function (callback) {
-        network = livefyre.getNetwork(constants.NETWORK_NAME, constants.NETWORK_KEY);
+        network = livefyre.getNetwork(c.NETWORK_NAME, c.NETWORK_KEY);
         callback();
     },
 
     tearDown: function (callback) {
         callback();
+    },
+
+    'should throw an error if any field is null or undefined in initialization': function(test) {
+        try {
+            Network.init(null, null);
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init(undefined, undefined);
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init('', '');
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init(c.NETWORK_NAME, undefined);
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init(undefined, c.NETWORK_KEY);
+            test.fail();
+        } catch (err) { }
+        test.done();
+    },
+
+    'should return a network urn': function(test) {
+        test.equals('urn:livefyre:'+ c.NETWORK_NAME, network.getUrn());
+        test.done();
     },
 
 	'should not allow urls without {id} in setUserSyncUrl': function(test) {
@@ -31,7 +60,11 @@ exports.unit = {
 	},
 
 	'should return null for non-alphanumeric user ids': function(test) {
-		test.ok(util.isError(network.buildUserAuthToken('test.-f12', 'test', 100.0)));
+        try {
+            network.buildUserAuthToken('test.-f12', 'test', 100.0);
+        } catch(err) {
+            test.ok(util.isError(err));
+        }
 		test.done();
 	},
 
