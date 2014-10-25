@@ -40,8 +40,14 @@ exports.unit = {
         test.done();
     },
 
-    'should return a network urn': function(test) {
+    'should return a network urn and urn for user': function(test) {
         test.equals('urn:livefyre:'+ c.NETWORK_NAME, network.getUrn());
+        test.equals(network.getUrn()+':user='+ c.USER_ID, network.getUrnForUser(c.USER_ID));
+        test.done();
+    },
+
+    'should get the proper network name': function(test) {
+        test.equals(c.NETWORK_NAME.split('.')[0], network.getNetworkName());
         test.done();
     },
 
@@ -56,6 +62,7 @@ exports.unit = {
 		var token = network.buildLivefyreToken();
 		test.ok(token);
 		test.ok(network.validateLivefyreToken(token));
+        test.ok(!network.validateLivefyreToken(network.buildUserAuthToken('not', 'system', 10)));
 		test.done();
 	},
 
@@ -69,10 +76,17 @@ exports.unit = {
 	},
 
 	'should test basic network api calls': function (test) {
-		var one = function() {
-			network.syncUser('user', function() { test.done(); });
-		};
+        test.expect(2);
+
+		var one = function(err) {
+            test.ok(typeof err == 'undefined');
+            network.syncUser('user', finish);
+        };
+        var finish = function (err) {
+            test.ok(typeof err == 'undefined');
+            test.done();
+        };
 
 		network.setUserSyncUrl('url/{id}', one);
-	}
+    }
 };

@@ -56,9 +56,12 @@ exports.unit = {
         test.equals('8bcfca7fb2187b1dcb627506deceee32', collection.buildChecksum());
         test.done();
     },
-    //TODO: change to try/catch
+
     'should check different variations of valid and invalid urls': function(test) {
-        test.ok(util.isError(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'test.com')));
+        try {
+            site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'test.com');
+            test.fail();
+        } catch (err) { }
         test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'http://test.com:8000'));
         test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'https://test.com'));
         test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'ftp://test.com/'));
@@ -67,22 +70,41 @@ exports.unit = {
         test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'http://www.mysite.com/myresumé.html'));
 
         test.done();
+    },
+
+    'should test that network issued is providing the proper urn': function(test) {
+        var collection = site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
+        test.ok(!collection.isNetworkIssued());
+
+        var topics  = [ Topic.create(site, 'ID', 'LABEL') ];
+        collection.data.topics = topics;
+        test.ok(!collection.isNetworkIssued());
+
+        topics.push(Topic.create(network, 'ID', 'LABEL'));
+        test.ok(collection.isNetworkIssued());
+        test.done()
+    },
+
+    'should test that collection is created and updated and an id is set': function(test) {
+        test.expect(3);
+
+        var name = 'NodeCreateCollection ' + new Date();
+        var collection = site.buildLiveCommentsCollection(name, name, c.URL);
+
+        var update = function(err, collection) {
+            test.ok(collection.data.id);
+            collection.data.title = 'NodeUpdateCollection' + new Date();
+            collection.createOrUpdate(getContent);
+        };
+        var getContent = function(err, collection) {
+            test.ok(collection);
+            collection.getCollectionContent(finish);
+        };
+        var finish = function(err, content) {
+            test.ok(content);
+            test.done();
+        };
+
+        collection.createOrUpdate(update);
     }
-//
-//    'should test basic site api calls': function(test) {
-//        test.expect(1);
-//
-//        var name = 'NodeJSCreateCollection'+new Date();
-//
-//        var one = function(collectionId) {
-//            var two = function(otherId) {
-//                test.equal(collectionId, otherId);
-//                test.done();
-//            };
-//
-//            site.getCollectionId(name, two);
-//        };
-//
-//        site.buildCollection(name, name, 'http://answers.livefyre.com/NODEJS', one);
-//    }
 };
