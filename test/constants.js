@@ -7,7 +7,6 @@ function Constants() {
         this.NETWORK_KEY = props[env]['NETWORK_KEY'];
         this.SITE_ID = props[env]['SITE_ID'];
         this.SITE_KEY = props[env]['SITE_KEY'];
-        this.COLLECTION_ID = props[env]['COLLECTION_ID'];
         this.USER_ID = props[env]['USER_ID'];
         this.ARTICLE_ID = props[env]['ARTICLE_ID'];
     } catch (err) {
@@ -15,7 +14,6 @@ function Constants() {
         this.NETWORK_KEY = process.env.NETWORK_KEY || '<NETWORK-KEY>';
         this.SITE_ID = process.env.SITE_ID || '<SITE-ID>';
         this.SITE_KEY = process.env.SITE_KEY || '<SITE-KEY>';
-        this.COLLECTION_ID = process.env.COLLECTION_ID || '<COLLECTION-ID>';
         this.USER_ID = process.env.USER_ID || '<USER-ID>';
         this.ARTICLE_ID = process.env.ARTICLE_ID || '<ARTICLE-ID>';
     }
