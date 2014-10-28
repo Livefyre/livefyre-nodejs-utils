@@ -3,3 +3,4 @@ doc
 testproperties.json
 .idea
 *.iml
+lib-cov
