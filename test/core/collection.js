@@ -1,6 +1,4 @@
 var c = require('./../constants');
-var	jwt = require('jwt-simple');
-var	util = require('util');
 
 var livefyre = require(c.PATH+'livefyre');
 var Collection = require(c.PATH+'core/collection');

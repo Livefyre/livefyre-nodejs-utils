@@ -1,5 +1,4 @@
 var	c = require('../constants');
-var jwt = require('jwt-simple');
 
 var livefyre = require(c.PATH+'livefyre');
 var PersonalizedStream = require(c.PATH+'api/personalized_stream');
@@ -15,7 +14,7 @@ exports.unit = {
     },
 
 	'should test network topic api calls': function(test) {
-		test.expect(3);
+		test.expect(4);
 
 		var one = function(err, result) {
 			test.equal(result.length, 1);
@@ -23,6 +22,7 @@ exports.unit = {
 		};
 		var two = function(err, result) {
 			test.equal(result.label, 'ONE');
+            test.equal(result.truncatedId(), '1');
 			PersonalizedStream.deleteTopic(network, result, three);
 		};
 		var three = function(err, result) {
@@ -176,9 +176,15 @@ exports.unit = {
         };
         var four = function(err, result) {
             test.equal(result, 1);
-            PersonalizedStream.deleteTopics(site, topics, five);
+            var title = 'NODE PSSTREAM TEST ' + new Date();
+            collection = site.buildLiveCommentsCollection(title, title, c.URL);
+            collection.data.topics = topics;
+            collection.createOrUpdate(five);
         };
         var five = function(err, result) {
+            PersonalizedStream.deleteTopics(site, topics, six);
+        };
+        var six = function(err, result) {
             test.done();
         };
         var topicMap = [
@@ -188,6 +194,4 @@ exports.unit = {
 
         site.buildLiveCommentsCollection(name, name, c.URL).createOrUpdate(createCollection);
 	}
-
-    //TODO: create/update collection with topics
 };
