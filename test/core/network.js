@@ -1,9 +1,9 @@
-var c = require('./constants');
-var livefyre = require('../lib/livefyre');
+var c = require('./../constants');
 var	jwt = require('jwt-simple');
 var	util = require('util');
 
-var Network = require('../lib/core/network');
+var livefyre = require(c.PATH+'livefyre');
+var Network = require(c.PATH+'core/network');
 
 
 exports.unit = {

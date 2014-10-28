@@ -20,6 +20,10 @@ function Constants() {
     this.URL = 'http://answers.livefyre.com/NODE';
     this.USER_ID = 'apitester';
     this.TITLE = 'NodeTest';
+
+    this.PATH =  process.env.LIVEFYRE_COV
+        ? '../../lib-cov/'
+        : '../../lib/';
 }
 
 Constants.Environments = Object.freeze({qa: 'qa', uat: 'uat', prod: 'prod'});

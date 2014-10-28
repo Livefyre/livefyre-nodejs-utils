@@ -1,10 +1,10 @@
-var livefyre = require('../../lib/livefyre');
+var	c = require('../constants');
 var jwt = require('jwt-simple');
 
-var PersonalizedStream = require('../../lib/api/personalized_stream');
-var	CursorFactory = require('../../lib/factory/cursor_factory');
-var	Topic = require('../../lib/dto/topic');
-var	c = require('../constants');
+var livefyre = require(c.PATH+'livefyre');
+var PersonalizedStream = require(c.PATH+'api/personalized_stream');
+var	CursorFactory = require(c.PATH+'factory/cursor_factory');
+var	Topic = require(c.PATH+'dto/topic');
 
 
 exports.unit = {
