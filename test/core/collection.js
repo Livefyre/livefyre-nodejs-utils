@@ -56,7 +56,6 @@ exports.unit = {
     },
 
     'should return a valid checksum': function(test) {
-        test.fail();
         var collection = site.buildLiveCommentsCollection('title', 'articleId', 'http://livefyre.com');
         collection.data.tags = 'tags';
         test.equals('8bcfca7fb2187b1dcb627506deceee32', collection.buildChecksum());
