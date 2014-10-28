@@ -1,4 +1,5 @@
 var c = require('./../constants');
+var jwt = require('jwt-simple');
 
 var livefyre = require(c.PATH+'livefyre');
 var Collection = require(c.PATH+'core/collection');
@@ -42,9 +43,15 @@ exports.unit = {
         test.done();
     },
 
-    'should return a collection meta token': function(test) {
+    'should return correct collection meta tokens': function(test) {
         var collection = site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
         test.ok(collection.buildCollectionMetaToken());
+
+        var topics  = [ Topic.create(network, 'ID', 'LABEL') ];
+        collection.data.topics = topics;
+
+        var token = collection.buildCollectionMetaToken();
+        test.ok(jwt.decode(token, network.data.key));
         test.done();
     },
 

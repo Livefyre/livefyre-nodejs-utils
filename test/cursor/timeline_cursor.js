@@ -13,6 +13,16 @@ exports.unit = {
         callback();
     },
 
+    'should test that date is set properly': function(test) {
+        var date = new Date();
+        var cursor = TimelineCursor.init(network, 'resource', 50, new Date(), new function() {});
+
+        cursor.data.setCursorTime(new Date());
+        test.equals(date.toISOString(), cursor.data.cursorTime);
+        test.done();
+
+    },
+
     'should test initialization': function(test) {
         try {
             TimelineCursor.init();

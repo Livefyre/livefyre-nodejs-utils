@@ -65,12 +65,15 @@ exports.unit = {
 		test.done();
 	},
 
-	'should return null for non-alphanumeric user ids': function(test) {
+	'should throw an error when user auth token input is bad': function(test) {
         try {
             network.buildUserAuthToken('test.-f12', 'test', 100.0);
-        } catch(err) {
-            test.ok(util.isError(err));
-        }
+        } catch(err) { }
+
+        try {
+            network.buildUserAuthToken('not', 'system', '100');
+            test.fail();
+        } catch(err) { }
 		test.done();
 	},
 
