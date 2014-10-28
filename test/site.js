@@ -1,10 +1,10 @@
-var c = require('../constants');
-var livefyre = require('../../lib/livefyre');
+var c = require('./constants');
+var livefyre = require('../lib/livefyre');
 var	jwt = require('jwt-simple');
 var	util = require('util');
 
-var CollectionType = require('../../lib/type/collection_type');
-var Site = require('../../lib/core/site');
+var CollectionType = require('../lib/type/collection_type');
+var Site = require('../lib/core/site');
 
 
 exports.unit = {

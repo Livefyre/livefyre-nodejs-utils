@@ -1,11 +1,11 @@
-var c = require('../constants');
-var livefyre = require('../../lib/livefyre');
+var c = require('./constants');
+var livefyre = require('../lib/livefyre');
 var	jwt = require('jwt-simple');
 var	util = require('util');
 
-var Collection = require('../../lib/core/collection');
-var CollectionType = require('../../lib/type/collection_type');
-var Topic = require('../../lib/dto/topic');
+var Collection = require('../lib/core/collection');
+var CollectionType = require('../lib/type/collection_type');
+var Topic = require('../lib/dto/topic');
 
 exports.unit = {
     setUp: function (callback) {
