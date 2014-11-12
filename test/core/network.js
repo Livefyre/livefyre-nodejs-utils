@@ -36,6 +36,10 @@ exports.unit = {
             Network.init(undefined, c.NETWORK_KEY);
             test.fail();
         } catch (err) { }
+        try {
+            Network.init('network.name', c.NETWORK_KEY);
+            test.fail();
+        } catch (err) { }
         test.done();
     },
 

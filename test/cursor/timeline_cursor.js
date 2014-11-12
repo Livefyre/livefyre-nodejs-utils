@@ -17,7 +17,7 @@ exports.unit = {
         var date = new Date();
         var cursor = TimelineCursor.init(network, 'resource', 50, new Date(), new function() {});
 
-        cursor.data.setCursorTime(new Date());
+        cursor.data.setCursorTime(date);
         test.equals(date.toISOString(), cursor.data.cursorTime);
         test.done();
 
