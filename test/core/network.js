@@ -70,9 +70,7 @@ exports.unit = {
 	},
 
 	'should throw an error when user auth token input is bad': function(test) {
-        try {
-            network.buildUserAuthToken('test.-f12', 'test', 100.0);
-        } catch(err) { }
+        network.buildUserAuthToken('test.-_F12', 'test', 100.0);
 
         try {
             network.buildUserAuthToken('not', 'system', '100');
@@ -94,5 +92,16 @@ exports.unit = {
         };
 
 		network.setUserSyncUrl('url/{id}', one);
+    },
+
+    'should test that an error is returned in the callback for api calls': function(test) {
+        test.expect(1);
+
+        var one = function(err) {
+            test.ok(util.isError(err));
+            test.done();
+        };
+
+        network.setUserSyncUrl('url/{id', one);
     }
 };
