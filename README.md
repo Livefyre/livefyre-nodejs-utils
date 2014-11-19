@@ -1,5 +1,7 @@
 # Livefyre NodeJS Utility Classes
 [![NPM version](https://badge.fury.io/js/livefyre.png)](http://badge.fury.io/js/livefyre)
+[![Circle CI](https://circleci.com/gh/Livefyre/livefyre-nodejs-utils.png?style=badge)](https://circleci.com/gh/Livefyre/livefyre-nodejs-utils)
+[![Coverage Status](https://coveralls.io/repos/Livefyre/livefyre-nodejs-utils/badge.png)](https://coveralls.io/r/Livefyre/livefyre-nodejs-utils)
 
 Livefyre's official library for common server-side tasks necessary for getting Livefyre apps (comments, reviews, etc.) working on your website.
 
@@ -8,71 +10,6 @@ Livefyre's official library for common server-side tasks necessary for getting L
 Run this line:
 
     $ npm install livefyre
-
-## Usage
-
-Instantiating a network object:
-
-```node
-var network = livefyre.getNetwork('networkName', 'networkKey');
-```
-
-Creating a Livefyre token:
-
-```node
-network.buildLivefyreToken();
-```
-
-Creating a user auth token:
-
-```node
-network.buildUserAuthToken('userId', 'displayName', expires);
-```
-
-To validate a Livefyre token:
-
-```node
-network.validateLivefyreToken('lfToken');
-```
-
-To send Livefyre a user sync url and then have Livefyre pull user data from that url:
-
-```node
-network.setUserSyncUrl('urlTemplate', callback);
-network.syncUser('userId', callback);
-```
-
-Instantiating a site object:
-
-```node
-var site = network.getSite('siteId', 'siteKey');
-```
-
-Building a collection meta token:
-*The {options} argument is optional.*
-
-```node
-site.buildCollectionMetaToken('title', 'articleId', 'url', {options});
-```
-
-Building a checksum:
-*The 'tags' argument is optional.*
-
-```node
-site.buildChecksum('title', url', 'tags');
-```
-
-To retrieve content collection data:
-
-```node
-site.getCollectionContent('articleId', callback);
-```
-
-To get a content collection's id:
-
-```Java
-site.getCollectionId('articleId', callback);
-```
 
 ## Additional Documentation
 

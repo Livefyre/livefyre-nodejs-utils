@@ -1,21 +1,57 @@
-var livefyre = require('../../lib/livefyre.js'),
-	jwt = require('jwt-simple'),
-	util = require('util');
+var c = require('./../constants');
+var	util = require('util');
 
-var Topic = require('../../lib/entity/topic.js');
+var livefyre = require(c.PATH+'livefyre');
+var Network = require(c.PATH+'core/network');
 
-var Constants = require('../constants.js');
 
 exports.unit = {
 	setUp: function (callback) {
-		constants = new Constants();
-		constants.setPropValues(Constants.Environments.prod);
-        network = livefyre.getNetwork(constants.NETWORK_NAME, constants.NETWORK_KEY);
+        network = livefyre.getNetwork(c.NETWORK_NAME, c.NETWORK_KEY);
         callback();
     },
 
     tearDown: function (callback) {
         callback();
+    },
+
+    'should throw an error if any field is null or undefined in initialization': function(test) {
+        try {
+            Network.init(null, null);
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init(undefined, undefined);
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init('', '');
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init(c.NETWORK_NAME, undefined);
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init(undefined, c.NETWORK_KEY);
+            test.fail();
+        } catch (err) { }
+        try {
+            Network.init('network.name', c.NETWORK_KEY);
+            test.fail();
+        } catch (err) { }
+        test.done();
+    },
+
+    'should return a network urn and urn for user': function(test) {
+        test.equals('urn:livefyre:'+ c.NETWORK_NAME, network.getUrn());
+        test.equals(network.getUrn()+':user='+ c.USER_ID, network.getUrnForUser(c.USER_ID));
+        test.done();
+    },
+
+    'should get the proper network name': function(test) {
+        test.equals(c.NETWORK_NAME.split('.')[0], network.getNetworkName());
+        test.done();
     },
 
 	'should not allow urls without {id} in setUserSyncUrl': function(test) {
@@ -29,19 +65,43 @@ exports.unit = {
 		var token = network.buildLivefyreToken();
 		test.ok(token);
 		test.ok(network.validateLivefyreToken(token));
+        test.ok(!network.validateLivefyreToken(network.buildUserAuthToken('not', 'system', 10)));
 		test.done();
 	},
 
-	'should return null for non-alphanumeric user ids': function(test) {
-		test.ok(util.isError(network.buildUserAuthToken('test.-f12', 'test', 100.0)));
+	'should throw an error when user auth token input is bad': function(test) {
+        network.buildUserAuthToken('test.-_F12', 'test', 100.0);
+
+        try {
+            network.buildUserAuthToken('not', 'system', '100');
+            test.fail();
+        } catch(err) { }
 		test.done();
-	}/*,
+	},
 
 	'should test basic network api calls': function (test) {
-		var one = function(result) { 
-			network.syncUser('user', function(result) { test.done(); });
-		};
+        test.expect(2);
+
+		var one = function(err) {
+            test.ok(typeof err == 'undefined');
+            network.syncUser('user', finish);
+        };
+        var finish = function (err) {
+            test.ok(typeof err == 'undefined');
+            test.done();
+        };
 
 		network.setUserSyncUrl('url/{id}', one);
-	}*/
-}
+    },
+
+    'should test that an error is returned in the callback for api calls': function(test) {
+        test.expect(1);
+
+        var one = function(err) {
+            test.ok(util.isError(err));
+            test.done();
+        };
+
+        network.setUserSyncUrl('url/{id', one);
+    }
+};
