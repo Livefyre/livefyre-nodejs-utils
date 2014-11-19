@@ -1,10 +1,15 @@
+=== 2.0.0 2014-11-19
+
+* Refactored most of the library and added Collection.
+* Added coverage and additional tests.
+* Added requirements to have fyre.co at end of network name.
+* Made user auth check allow dash, underscore, and dots.
+
 === 1.3.2 2014-08-11
 
 * Added rest of API calls to SSL toggle.
 * Changed method signatures to old method of having callbacks at the end of the function.
 * Updated error handling based on feedback.
-* Added requirements to have fyre.co at end of network name.
-* Made user auth check allow dash, underscore, and dots.
 
 === 1.3.1 2014-08-11
 
