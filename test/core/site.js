@@ -49,13 +49,13 @@ exports.unit = {
         var coll = site.buildCollection(CollectionType.LIVECOMMENTS, c.TITLE, c.TITLE, c.URL);
         test.equal(coll.data.type, CollectionType.LIVECOMMENTS);
 
-        coll = site.buildLiveBlogCollection(c.TITLE, c.TITLE, c.URL);
+        coll = site.buildBlogCollection(c.TITLE, c.TITLE, c.URL);
         test.equal(coll.data.type, CollectionType.LIVEBLOG);
 
-        coll = site.buildLiveChatCollection(c.TITLE, c.TITLE, c.URL);
+        coll = site.buildChatCollection(c.TITLE, c.TITLE, c.URL);
         test.equal(coll.data.type, CollectionType.LIVECHAT);
 
-        coll = site.buildLiveCommentsCollection(c.TITLE, c.TITLE, c.URL);
+        coll = site.buildCommentsCollection(c.TITLE, c.TITLE, c.URL);
         test.equal(coll.data.type, CollectionType.LIVECOMMENTS);
 
         coll = site.buildCountingCollection(c.TITLE, c.TITLE, c.URL);

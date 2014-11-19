@@ -44,7 +44,7 @@ exports.unit = {
     },
 
     'should return correct collection meta tokens': function(test) {
-        var collection = site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
+        var collection = site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
         test.ok(collection.buildCollectionMetaToken());
 
         var topics  = [ Topic.create(network, 'ID', 'LABEL') ];
@@ -56,7 +56,7 @@ exports.unit = {
     },
 
     'should return a valid checksum': function(test) {
-        var collection = site.buildLiveCommentsCollection('title', 'articleId', 'http://livefyre.com');
+        var collection = site.buildCommentsCollection('title', 'articleId', 'http://livefyre.com');
         collection.data.tags = 'tags';
         test.equals('8bcfca7fb2187b1dcb627506deceee32', collection.buildChecksum());
         collection.data.extensions = '{"blah":"cool"}';
@@ -66,21 +66,21 @@ exports.unit = {
 
     'should check different variations of valid and invalid urls': function(test) {
         try {
-            site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'test.com');
+            site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, 'test.com');
             test.fail();
         } catch (err) { }
-        test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'http://test.com:8000'));
-        test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'https://test.com'));
-        test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'ftp://test.com/'));
-        test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, "https://test.com/path/test.-_~!$&'()*+,=:@/dash"));
-        test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'http://清华大学.cn'));
-        test.ok(site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, 'http://www.mysite.com/myresumé.html'));
+        test.ok(site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, 'http://test.com:8000'));
+        test.ok(site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, 'https://test.com'));
+        test.ok(site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, 'ftp://test.com/'));
+        test.ok(site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, "https://test.com/path/test.-_~!$&'()*+,=:@/dash"));
+        test.ok(site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, 'http://清华大学.cn'));
+        test.ok(site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, 'http://www.mysite.com/myresumé.html'));
 
         test.done();
     },
 
     'should test that network issued is providing the proper urn': function(test) {
-        var collection = site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
+        var collection = site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
         test.ok(!collection.isNetworkIssued());
 
         var topics  = [ Topic.create(site, 'ID', 'LABEL') ];
@@ -96,7 +96,7 @@ exports.unit = {
         test.expect(3);
 
         var name = 'NodeCreateCollection ' + new Date();
-        var collection = site.buildLiveCommentsCollection(name, name, c.URL);
+        var collection = site.buildCommentsCollection(name, name, c.URL);
 
         var update = function(err, collection) {
             test.ok(collection.data.id);

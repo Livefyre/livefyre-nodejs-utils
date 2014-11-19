@@ -7,7 +7,7 @@ exports.unit = {
     setUp: function (callback) {
         network = livefyre.getNetwork(c.NETWORK_NAME, c.NETWORK_KEY);
         site = network.getSite(c.SITE_ID, c.SITE_KEY);
-        collection = site.buildLiveCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
+        collection = site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
         callback();
     },
 

@@ -177,7 +177,7 @@ exports.unit = {
         var four = function(err, result) {
             test.equal(result, 1);
             var title = 'NODE PSSTREAM TEST ' + new Date();
-            collection = site.buildLiveCommentsCollection(title, title, c.URL);
+            collection = site.buildCommentsCollection(title, title, c.URL);
             collection.data.topics = topics;
             collection.createOrUpdate(five);
         };
@@ -192,6 +192,6 @@ exports.unit = {
             { key: 3, value: 'THREE' }
         ];
 
-        site.buildLiveCommentsCollection(name, name, c.URL).createOrUpdate(createCollection);
+        site.buildCommentsCollection(name, name, c.URL).createOrUpdate(createCollection);
 	}
 };
