@@ -1,3 +1,7 @@
+=== 2.0.1 2014-11-21
+
+* Added validator back in as part of the dependencies.
+
 === 2.0.0 2014-11-19
 
 * Refactored most of the library and added Collection.
