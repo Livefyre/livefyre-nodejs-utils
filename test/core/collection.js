@@ -1,5 +1,5 @@
 var c = require('./../constants');
-var jwt = require('jwt-simple');
+var jwt = require('jsonwebtoken');
 
 var livefyre = require(c.PATH+'livefyre');
 var Collection = require(c.PATH+'core/collection');
@@ -51,7 +51,7 @@ exports.unit = {
         collection.data.topics = topics;
 
         var token = collection.buildCollectionMetaToken();
-        test.ok(jwt.decode(token, network.data.key));
+        test.ok(jwt.verify(token, network.data.key));
         test.done();
     },
 

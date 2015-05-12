@@ -1,3 +1,8 @@
+=== 2.0.2 2015-05-12
+
+* Changed JWT library to one that is approved in jwt.io.
+* Updated dependencies to be more flexible.
+
 === 2.0.1 2014-11-21
 
 * Added validator back in as part of the dependencies.
