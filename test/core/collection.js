@@ -55,6 +55,21 @@ exports.unit = {
         test.done();
     },
 
+    'should return same collection meta token for same collection': function(test) {
+        var collection = site.buildCommentsCollection(c.TITLE, c.ARTICLE_ID, c.URL);
+        test.ok(collection.buildCollectionMetaToken());
+
+        var topics  = [ Topic.create(network, 'ID', 'LABEL') ];
+        collection.data.topics = topics;
+
+        var token = collection.buildCollectionMetaToken();
+        test.ok(jwt.verify(token, network.data.key));
+
+        var otherToken = collection.buildCollectionMetaToken();
+        test.ok(token === otherToken);
+        test.done();
+    },
+
     'should return a valid checksum': function(test) {
         var collection = site.buildCommentsCollection('title', 'articleId', 'http://livefyre.com');
         collection.data.tags = 'tags';
