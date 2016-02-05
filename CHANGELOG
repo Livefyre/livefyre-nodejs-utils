@@ -1,4 +1,4 @@
-=== 2.0.4 2016-02-04
+=== 2.0.5 2016-02-04
 
 * Updated token generation to include noTimestamp for caching reasons.
 
