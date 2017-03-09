@@ -1,3 +1,7 @@
+=== 2.0.6 2017-03-08
+
+* Bugfix in collection validator.
+
 === 2.0.5 2016-02-04
 
 * Updated token generation to include noTimestamp for caching reasons.
