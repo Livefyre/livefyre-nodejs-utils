@@ -1,6 +1,6 @@
 {
   "name": "livefyre",
-  "version": "2.0.5",
+  "version": "2.0.7",
   "description": "Livefyre NodeJS utility classes",
   "author": "Livefyre <tools@livefyre.com> (https://github.com/livefyre)",
   "homepage": "https://github.com/livefyre/livefyre-nodejs-utils",
