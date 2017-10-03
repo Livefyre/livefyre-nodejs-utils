@@ -1,5 +1,5 @@
 # Livefyre NodeJS Utility Classes
-[![NPM version](https://badge.fury.io/js/livefyre.png)](http://badge.fury.io/js/livefyre)
+[![NPM version](https://badge.fury.io/js/livefyre.png)](https://badge.fury.io/js/livefyre)
 [![Circle CI](https://circleci.com/gh/Livefyre/livefyre-nodejs-utils.png?style=badge)](https://circleci.com/gh/Livefyre/livefyre-nodejs-utils)
 [![Coverage Status](https://coveralls.io/repos/Livefyre/livefyre-nodejs-utils/badge.png)](https://coveralls.io/r/Livefyre/livefyre-nodejs-utils)
 
@@ -13,7 +13,7 @@ Run this line:
 
 ## Additional Documentation
 
-Located [here](http://answers.livefyre.com/developers/libraries).
+Located [here](https://answers.livefyre.com/developers/libraries).
 
 ## Contributing
 
