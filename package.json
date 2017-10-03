@@ -19,7 +19,7 @@
   "dependencies": {
     "validator": ">=3.5.0",
     "restler": ">=3.2.0",
-    "jsonwebtoken": "7.4.2"
+    "jsonwebtoken": ">=5.0.0"
   },
   "devDependencies": {
     "nodeunit": "~0.9.0",
