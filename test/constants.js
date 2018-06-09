@@ -17,7 +17,7 @@ function Constants() {
         this.USER_ID = process.env.USER_ID || '<USER-ID>';
         this.ARTICLE_ID = process.env.ARTICLE_ID || '<ARTICLE-ID>';
     }
-    this.URL = 'http://answers.livefyre.com/NODE';
+    this.URL = 'https://answers.livefyre.com/NODE';
     this.USER_ID = 'apitester';
     this.TITLE = 'NodeTest';
 

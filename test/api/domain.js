@@ -21,7 +21,7 @@ exports.unit = {
         test.equals(quillSsl, Domain.quill(site));
         test.equals(quillSsl, Domain.quill(collection));
 
-        var quill = 'http://quill.' + network.getNetworkName() + '.fyre.co';
+        var quill = 'https://quill.' + network.getNetworkName() + '.fyre.co';
         network.ssl = false;
         test.equals(quill, Domain.quill(network));
         test.equals(quill, Domain.quill(site));
@@ -35,7 +35,7 @@ exports.unit = {
         test.equals(bootstrapSsl, Domain.bootstrap(site));
         test.equals(bootstrapSsl, Domain.bootstrap(collection));
 
-        var bootstrap = 'http://bootstrap.' + network.getNetworkName() + '.fyre.co';
+        var bootstrap = 'https://bootstrap.' + network.getNetworkName() + '.fyre.co';
         network.ssl = false;
         test.equals(bootstrap, Domain.bootstrap(network));
         test.equals(bootstrap, Domain.bootstrap(site));
